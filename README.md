@@ -30,8 +30,10 @@ Passionate about computer networks, system administration, cybersecurity, and so
 
 ---
 
-### 📊 GitHub Stats
+### 📊 GitHub Stats & Activity
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=mydraa&show_icons=true&theme=tokyonight&hide_border=true)
+![GitHub Streak](https://streak-stats.demolab.com/?user=mydraa&theme=tokyonight&hide_border=true)
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=mydraa&layout=compact&theme=tokyonight&hide_border=true)
+<br/>
+
+![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=mydraa&theme=tokyo-night&hide_border=true&area=true)
