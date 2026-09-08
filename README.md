@@ -30,10 +30,8 @@ Passionate about computer networks, system administration, cybersecurity, and so
 
 ---
 
-### 📊 GitHub Stats & Activity
+### 📊 GitHub Stats
 
-![GitHub Streak](https://streak-stats.demolab.com/?user=mydraa&theme=tokyonight&hide_border=true)
-
-<br/>
-
-![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=mydraa&theme=tokyo-night&hide_border=true&area=true)
+<p align="center">
+  <img src="https://streak-stats.demolab.com/?user=mydraa&theme=tokyonight&hide_border=true" alt="GitHub Streak" />
+</p>
