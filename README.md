@@ -32,7 +32,6 @@ Passionate about computer networks, system administration, cybersecurity, and so
 
 ### 📊 GitHub Stats
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=mydraa&show_icons=true&theme=tokyonight&hide_border=true" alt="GitHub Stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=mydraa&layout=compact&theme=tokyonight&hide_border=true" alt="Top Languages" />
-</p>
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=mydraa&show_icons=true&theme=tokyonight&hide_border=true)
+
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=mydraa&layout=compact&theme=tokyonight&hide_border=true)
