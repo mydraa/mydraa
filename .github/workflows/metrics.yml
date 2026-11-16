@@ -1,9 +1,7 @@
 name: Metrics
 on:
-  # Mise à jour automatique chaque nuit à minuit UTC
   schedule:
-    - cron: "0 0 * * *"
-  # Permet de déclencher le rendu à tout moment depuis l'onglet Actions
+    - cron: "0 */6 * * *"
   workflow_dispatch:
   push:
     branches: ["main"]
@@ -14,6 +12,9 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Generate GitHub Metrics SVG
         uses: lowlighter/metrics@latest
         with:
@@ -21,10 +22,20 @@ jobs:
           user: mydraa
           template: classic
           base: header, activity, community, repositories, metadata
-          base_indepth: true
-          repositories_affiliations: owner, collaborator, organization_member
-          # Décommente la ligne suivante uniquement si tu veux aussi compter les commits de github-actions[bot] :
-          # users_ignored: "dependabot[bot],dependabot-preview[bot]"
           config_timezone: Europe/Paris
-          output_action: commit
-          committer_message: "chore(metrics): update github metrics"
+          output_action: none
+          filename: github-metrics.svg
+
+      - name: Sync exact profile contribution count
+        env:
+          GH_TOKEN: ${{ secrets.METRICS_TOKEN }}
+        run: |
+          TOTAL=$(gh api graphql -f query='query { user(login: "mydraa") { contributionsCollection { contributionCalendar { totalContributions } } } }' --jq '.data.user.contributionsCollection.contributionCalendar.totalContributions')
+          sed -i -E "s/[0-9]+ Commits/${TOTAL} Contributions/g" github-metrics.svg
+
+      - name: Commit updated SVG
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add github-metrics.svg
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(metrics): update github metrics" && git push)
