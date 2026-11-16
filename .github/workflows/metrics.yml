@@ -21,6 +21,10 @@ jobs:
           user: mydraa
           template: classic
           base: header, activity, community, repositories, metadata
+          base_indepth: true
+          repositories_affiliations: owner, collaborator, organization_member
+          # Décommente la ligne suivante uniquement si tu veux aussi compter les commits de github-actions[bot] :
+          # users_ignored: "dependabot[bot],dependabot-preview[bot]"
           config_timezone: Europe/Paris
           output_action: commit
           committer_message: "chore(metrics): update github metrics"
