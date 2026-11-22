@@ -6,6 +6,10 @@ on:
   push:
     branches: ["main"]
 
+concurrency:
+  group: github-metrics
+  cancel-in-progress: false
+
 jobs:
   github-metrics:
     runs-on: ubuntu-latest
@@ -15,27 +19,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Generate GitHub Metrics SVG
-        uses: lowlighter/metrics@latest
-        with:
-          token: ${{ secrets.METRICS_TOKEN }}
-          user: mydraa
-          template: classic
-          base: header, activity, community, repositories, metadata
-          config_timezone: Europe/Paris
-          output_action: none
-          filename: github-metrics.svg
-
-      - name: Sync exact profile contribution count
+      - name: Generate GitHub Metrics SVGs
         env:
-          GH_TOKEN: ${{ secrets.METRICS_TOKEN }}
+          METRICS_TOKEN: ${{ secrets.METRICS_TOKEN }}
         run: |
-          TOTAL=$(gh api graphql -f query='query { user(login: "mydraa") { contributionsCollection { contributionCalendar { totalContributions } } } }' --jq '.data.user.contributionsCollection.contributionCalendar.totalContributions')
-          sed -i -E "s/[0-9]+ Commits/${TOTAL} Contributions/g" github-metrics.svg
+          python3 .github/scripts/generate_metrics.py \
+            --user mydraa \
+            --timezone Europe/Paris \
+            --dark-out github-metrics.svg \
+            --light-out github-metrics-light.svg
 
-      - name: Commit updated SVG
+      - name: Commit updated SVGs
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add github-metrics.svg
+          git add github-metrics.svg github-metrics-light.svg
           git diff --quiet && git diff --staged --quiet || (git commit -m "chore(metrics): update github metrics" && git push)

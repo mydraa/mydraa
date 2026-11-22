@@ -33,5 +33,9 @@ Passionate about computer networks, system administration, cybersecurity, and so
 ### 📊 GitHub Metrics & Activity
 
 <p align="center">
-  <img src="./github-metrics.svg" alt="GitHub Metrics" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./github-metrics.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="./github-metrics-light.svg" />
+    <img src="./github-metrics.svg" alt="GitHub Metrics" />
+  </picture>
 </p>
